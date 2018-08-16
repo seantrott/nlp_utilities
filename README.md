@@ -42,7 +42,7 @@ topics = tm.transform(example_documents)
 Instead of using `fit` and `transform` separately, you can also use `fit_transform` directly:
 
 ```
-topics = tm.fit_tranfosm(example_documents)
+topics = tm.fit_transform(example_documents)
 ```
 
 ## To do
