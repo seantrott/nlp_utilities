@@ -30,7 +30,7 @@ class Tokenizer(object):
 class TopicModeler(object):
     """Base class for doing topic modeling."""
 
-    def __init__(self, num_topics=10, language='english', lemmatize=True, max_df=.5, min_df=2, vectorizer_name='tfidf', transformer_name='lsa'):
+    def __init__(self, num_topics=10, language='english', lemmatize=True, max_df=.5, min_df=1, vectorizer_name='tfidf', transformer_name='lsa'):
         """Init."""
         self.language = language
         self.num_topics = num_topics
@@ -76,11 +76,16 @@ class TopicModeler(object):
                     'lda': LatentDirichletAllocation}
         return mappings[transformer_name](n_components=self.num_topics)
 
-    def vectorize_documents(self, documents):
+    def vectorize_documents(self, documents, fit=True):
         """Vectorize documents."""
         if self.vectorizer is None:
             self.vectorizer = self._load_vectorizer(self.vectorizer_name)
-            self.vectorizer.fit(documents)
+        if fit:
+            try:
+                self.vectorizer.fit(documents)
+            except Exception as e:
+                self.vectorizer = None
+                raise e
         return self.vectorizer.transform(documents)
 
     def fit(self, documents):
@@ -94,7 +99,7 @@ class TopicModeler(object):
         """Transform documents using topic model."""
         if self.transformer is None:
             raise Exception("Model not yet fit. First call TopicModeler.fit(...).")
-        vectorized_text = self.vectorize_documents(documents)
+        vectorized_text = self.vectorize_documents(documents, fit=False)
         transformed = self.transformer.transform(vectorized_text)
         labels = self._get_topic_labels(np.array(self.vectorizer.get_feature_names()), self.transformer.components_)
         return pd.DataFrame(transformed, columns=labels)
