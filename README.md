@@ -13,4 +13,4 @@ For now, you'll need to clone or download the repo, using:
 
 Then add `nlp_utilities` to your `PYTHONPATH`, replacing `DIR` with the path to whatever directory `nlp_utilities` is stored in.
 
-```export PYTHONPATH="{DIR}":$PYTHONPATH
+```export PYTHONPATH="{DIR}":$PYTHONPATH```
