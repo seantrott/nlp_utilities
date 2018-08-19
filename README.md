@@ -71,9 +71,31 @@ Instead of using `fit` and `transform` separately, you can also use `fit_transfo
 topics = tm.fit_transform(example_documents)
 ```
 
+These topics could be used for a number of tasks, including **document classification**. 
+
+
+### Computational linguistics
+
+There are also several utility methods (and classes) for doing work related to computational linguistics:
+
+#### Finding minimal pairs / sets
+
+Given a list of words, one might want to know the **minimal sets** that appear in that list: groups of words that differ only by one sound (or one character). 
+
+There are two methods that could be used for this, depending on whether you want your output grouped in terms of **minimal pairs** or **minimal sets**:
+
+```
+from nlp_utilities import CorpusUtilities
+
+test_words = ['dog', 'wog', 'fool', 'cool', 'cook', 'sog']
+CorpusUtilities.get_minimal_orthographic_pairs(test_words)
+CorpusUtilities.get_minimal_orthographic_sets(test_words)
+
+
+```
+
 ## To do
 
 Add utilities for:
-* Document classification
 * Sentiment analysis
 * LWIC
