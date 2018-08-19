@@ -90,8 +90,17 @@ from nlp_utilities import CorpusUtilities
 test_words = ['dog', 'wog', 'fool', 'cool', 'cook', 'sog']
 CorpusUtilities.get_minimal_orthographic_pairs(test_words)
 CorpusUtilities.get_minimal_orthographic_sets(test_words)
+```
 
+#### Getting syllable structure
 
+Given a phonetic transcription of words (or sentences) with syllables marked, it might be useful to break each syllable down into its components:
+
+```
+from nlp_utilities import CorpusUtilities
+
+example_word = 'lip'  # CELEX transcription for "leap"
+CorpusUtilities.get_syllable_components(example_word)
 ```
 
 ## To do
@@ -99,3 +108,5 @@ CorpusUtilities.get_minimal_orthographic_sets(test_words)
 Add utilities for:
 * Sentiment analysis
 * LWIC
+
+Add tests.
