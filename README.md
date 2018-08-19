@@ -1,9 +1,9 @@
 # NLP Utilities
 
 Library with utility functions and wrapper classes to perform various NLP functions, including:
-* [Cleaning](#cleaning)
-* Tokenization and lemmatizing
-* Quick topic modeling (LSA, LDA) interface
+* [Document Cleaning](#document-cleaning)
+* [Topic modeling](#topic-modeling)
+* [Computational Linguistics](#computational-linguistics)
 
 ## Installing
 
@@ -17,7 +17,7 @@ Then add `nlp_utilities` to your `PYTHONPATH`, replacing `DIR` with the path to 
 
 ## Using NLP Utilities
 
-### Cleaning
+### Document Cleaning
 
 The `TextCleaner` module has several simple scripts for cleaning and tokenizing documents for the purpose of topic modeling, sentiment analysis, word2vec modeling, and more.
 
