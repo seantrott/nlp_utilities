@@ -7,37 +7,20 @@ from nltk.stem import WordNetLemmatizer
 from sklearn.decomposition import LatentDirichletAllocation, TruncatedSVD
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 
-
-class Tokenizer(object):
-    """Tokenize (and optionally lemmatize)."""
-
-    def __init__(self, language='english', lemmatize=True):
-        """Init."""
-        self.lemmatizer = WordNetLemmatizer()
-        self.lemmatize = lemmatize
-
-    def preprocess(self, doc):
-        """Tokenize and preprocess doc."""
-        if self.lemmatize:
-            return [self.lemmatizer.lemmatize(word) for word in nltk.word_tokenize(doc)]
-        return nltk.word_tokenize(doc)
-
-    def __call__(self, doc):
-        """Lemmatize and tokenize doc."""
-        return self.preprocess(doc)
+from .cleaning import TextCleaner
 
 
 class TopicModeler(object):
     """Base class for doing topic modeling."""
 
-    def __init__(self, num_topics=10, language='english', lemmatize=True, max_df=.5, min_df=1, vectorizer_name='tfidf', transformer_name='lsa'):
+    def __init__(self, num_topics=10, language='english', lemmatize=True, remove_stops=True, max_df=.5, min_df=1, vectorizer_name='tfidf', transformer_name='lsa'):
         """Init."""
         self.language = language
         self.num_topics = num_topics
         self.lemmatize = lemmatize
         self.max_df = max_df
         self.min_df = min_df
-        self.tokenizer = Tokenizer(language, lemmatize)
+        self.tokenizer = TextCleaner(language=language, lemmatize=lemmatize, remove_stops=remove_stops)
         self.vectorizer_name = vectorizer_name
         self.vectorizer = None
         self.transformer_name = transformer_name

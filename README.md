@@ -37,7 +37,7 @@ Or use the `TextCleaner.clean(...)` utility method to bundle these methods into 
 TextCleaner.clean(text)
 ```
 
-### Tokenizing
+#### Preprocessing
 
 You can also turn a document into a list of word tokens using `tokenize_words`. This requires instantiating `TextCleaner`.
 
@@ -45,6 +45,7 @@ You can also turn a document into a list of word tokens using `tokenize_words`. 
 tc = TextCleaner()
 tc.tokenize_words('the quick brown fox', remove_stops=True)
 ```
+
 
 ### Topic Modeling
 

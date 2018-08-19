@@ -1,4 +1,4 @@
-from .src.topic_modeling import Tokenizer, TopicModeler
+from .src.topic_modeling import TopicModeler
 from .src.cleaning import TextCleaner
 
 

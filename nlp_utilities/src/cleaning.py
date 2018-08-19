@@ -2,6 +2,7 @@
 
 import re
 
+from nltk.stem import WordNetLemmatizer
 from nltk import word_tokenize, sent_tokenize
 from nltk.corpus import stopwords
 from bs4 import BeautifulSoup
@@ -10,13 +11,13 @@ from bs4 import BeautifulSoup
 class TextCleaner(object):
     """Removes html, hyperlinks, etc."""
 
-    def __init__(self, language='english', stops=None):
+    def __init__(self, language='english', stops=None, lemmatizer=WordNetLemmatizer(), 
+                 lemmatize=False, remove_stops=True):
         self.language = language
-        self.stopwords = self._load_stops(stops=stops)
-
-    def _load_stops(self, stops):
-        """Load stopwords."""
-        return stops or stopwords.words(self.language)
+        self.stopwords = stops or stopwords.words(self.language)
+        self.lemmatizer = lemmatizer
+        self.lemmatize = lemmatize
+        self.remove_stops = remove_stops
 
     @classmethod
     def normalize_spacing(cls, text):
@@ -42,12 +43,6 @@ class TextCleaner(object):
         cleaned = BeautifulSoup(text, 'lxml')
         return cleaned.text
 
-    def tokenize_words(self, text, remove_stops=True):
-        """Word-tokenize document."""
-        if remove_stops:
-            return [w for w in word_tokenize(text) if w not in self.stopwords]
-        return [w for w in word_tokenize(text)]
-
     @classmethod
     def clean(cls, text, remove_links=True, normalize_space=True):
         """Clean text."""
@@ -57,3 +52,20 @@ class TextCleaner(object):
         if normalize_space:
             cleantext = cls.normalize_spacing(cleantext)
         return cleantext.strip()
+
+    def tokenize_words(self, text, remove_stops=True):
+        """Word-tokenize document."""
+        if remove_stops:
+            return [w for w in word_tokenize(text) if w not in self.stopwords]
+        return [w for w in word_tokenize(text)]
+
+    def preprocess(self, doc):
+        """Tokenize and preprocess doc."""
+        cleaned = TextCleaner.clean(doc)
+        if self.lemmatize:
+            return [self.lemmatizer.lemmatize(word) for word in self.tokenize_words(cleaned, remove_stops=self.remove_stops)]
+        return self.tokenize_words(cleaned, remove_stops=self.remove_stops)
+
+    def __call__(self, doc):
+        """Lemmatize and tokenize doc."""
+        return self.preprocess(doc)
