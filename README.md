@@ -94,7 +94,7 @@ CorpusUtilities.get_minimal_orthographic_sets(test_words)
 
 #### Getting syllable structure
 
-Given a phonetic transcription of words (or sentences) with syllables marked, it might be useful to break each syllable down into its components:
+Given a phonetic transcription of words (or sentences) with syllables marked, it might be useful to break each syllable down into its components. Note that this requires a Regex-formatted string containing the possible **nuclei** that can occur in this mode of phonetic transcription; the default uses the CELEX transcription.
 
 ```
 from nlp_utilities import CorpusUtilities
