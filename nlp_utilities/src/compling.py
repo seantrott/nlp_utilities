@@ -5,7 +5,9 @@ import editdistance as ed
 
 import re
 
+
 class CorpusUtilities(object):
+    """Utility methods for extracting useful statistics from corpora."""
 
     @classmethod
     def get_minimal_orthographic_sets(cls, words, index=0):
@@ -63,7 +65,7 @@ class CorpusUtilities(object):
     def get_syllable_components(cls, syllable, nuclei='[5@694{8312i7u$#eqFEIQVU$]|ju'):
         """Split syllable into onset, nucleus, and coda.
 
-        Requires regex code of possible nuclei. Default is CELEX encoding of nuclei 
+        Requires regex code of possible nuclei. Default is CELEX encoding of nuclei
         realizations.
 
         Parameters
@@ -85,3 +87,9 @@ class CorpusUtilities(object):
         return {'nucleus': nucleus[0],
                 'onset': onset,
                 'coda': coda}
+
+    @classmethod
+    def is_rhyme(cls, s1, s2):
+        """Returns whether syllables rhyme."""
+        s1_components, s2_components = cls.get_syllable_components(s1), cls.get_syllable_components(s2)
+        return s1_components['nucleus'] == s2_components['nucleus'] and s1_components['coda'] == s2_components['coda']

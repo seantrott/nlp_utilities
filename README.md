@@ -71,7 +71,7 @@ Instead of using `fit` and `transform` separately, you can also use `fit_transfo
 topics = tm.fit_transform(example_documents)
 ```
 
-These topics could be used for a number of tasks, including **document classification**. 
+These topics could be used for a number of tasks, including **document classification**.
 
 
 ### Computational linguistics
@@ -80,7 +80,7 @@ There are also several utility methods (and classes) for doing work related to c
 
 #### Finding minimal pairs / sets
 
-Given a list of words, one might want to know the **minimal sets** that appear in that list: groups of words that differ only by one sound (or one character). 
+Given a list of words, one might want to know the **minimal sets** that appear in that list: groups of words that differ only by one sound (or one character).
 
 There are two methods that could be used for this, depending on whether you want your output grouped in terms of **minimal pairs** or **minimal sets**:
 
@@ -108,5 +108,9 @@ CorpusUtilities.get_syllable_components(example_word)
 Add utilities for:
 * Sentiment analysis
 * LWIC
+
+Compling utilities:
+* Find out whether words rhyme
+* Maybe store CMU, CELEX, or another standard pronunciation database with CorpusUtilities --> then this could be used automatically to construct training data, find rhymes, etc.
 
 Add tests.
