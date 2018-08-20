@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 class TextCleaner(object):
     """Removes html, hyperlinks, etc."""
 
-    def __init__(self, language='english', stops=None, lemmatizer=WordNetLemmatizer(), 
+    def __init__(self, language='english', stops=None, lemmatizer=WordNetLemmatizer(),
                  lemmatize=False, remove_stops=True):
         self.language = language
         self.stopwords = stops or stopwords.words(self.language)

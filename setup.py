@@ -31,5 +31,5 @@ setup(
         ],
     download_url = 'https://github.com/seantrott/nlp_utilities',
     keywords = ['nlp', 'text-mining'],
-    install_requires = ['numpy', 'nltk', 'bs4', 'sklearn', 'pandas']
+    install_requires = ['numpy', 'nltk', 'bs4', 'sklearn', 'pandas', 'editdistance']
 )
