@@ -85,7 +85,7 @@ Given a list of words, one might want to know the **minimal sets** that appear i
 There are two methods that could be used for this, depending on whether you want your output grouped in terms of **minimal pairs** or **minimal sets**:
 
 ```
-from nlp_utilities import CorpusUtilities
+from nlp_utilities.compling import CorpusUtilities
 
 test_words = ['dog', 'wog', 'fool', 'cool', 'cook', 'sog']
 CorpusUtilities.get_minimal_orthographic_pairs(test_words)
@@ -97,7 +97,7 @@ CorpusUtilities.get_minimal_orthographic_sets(test_words)
 Given a phonetic transcription of words (or sentences) with syllables marked, it might be useful to break each syllable down into its components. Note that this requires a Regex-formatted string containing the possible **nuclei** that can occur in this mode of phonetic transcription; the default uses the CELEX transcription.
 
 ```
-from nlp_utilities import CorpusUtilities
+from nlp_utilities.compling import CorpusUtilities
 
 example_word = 'lip'  # CELEX transcription for "leap"
 CorpusUtilities.get_syllable_components(example_word)

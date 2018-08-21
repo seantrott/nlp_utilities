@@ -1,12 +1,9 @@
-from .src.topic_modeling import TopicModeler
-from .src.cleaning import TextCleaner
-from .src.compling import CorpusUtilities
+from .processing.topic_modeling import TopicModeler
+from .processing.cleaning import TextCleaner
 
 
 __all__ = [
-	'CorpusUtilities',
 	'TextCleaner',
-    'TopicModeler',
-    'Tokenizer'
+    'TopicModeler'
 ]
 
