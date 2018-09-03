@@ -103,6 +103,21 @@ example_word = 'lip'  # CELEX transcription for "leap"
 CorpusUtilities.get_syllable_components(example_word)
 ```
 
+#### Comparing the form and meaning distances of words
+
+Given a list of words, you might also want to compare how each pair of words differs in form and meaning.
+
+Here, you can use the `SystematicityUtilities` class. Assuming you have a pretrained `word2vec` model on your computer, you can pass that model into the class, then use the `compare_form_and_meaning` function. By default, the class uses Levenshtein distance as its *form metric*, and *cosine distance* (in the `word2vec` model) as its *meaning metric*, but alternative comparators can be passed in.
+
+```
+from nlp_utilities.compling import SystematicityUtilities
+
+systematicity_utils = SystematicityUtilities(model)
+comparisons = systematicity_utils.compare_form_and_meaning(words)
+```
+
+(Where `model` is a pretrained `word2vec` model, and `words` is a list of strings.)
+
 ## To do
 
 Add utilities for:
