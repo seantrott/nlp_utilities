@@ -10,7 +10,7 @@ class CorpusUtilities(object):
     """Utility methods for extracting useful statistics from corpora."""
 
     @classmethod
-    def get_minimal_orthographic_sets(cls, words, index=0):
+    def get_minimal_orthographic_sets(cls, words, index=0, verbose=False):
         """Retrieve all minimal sets from input words, as long as their
         orthographic difference is at the correct index.
 
@@ -28,6 +28,8 @@ class CorpusUtilities(object):
         """
         sets, seen = [], []
         for n1, w1 in enumerate(words):
+            if verbose:
+                print("{index} of {length} words".format(index=n1, length=len(words)))
             w1_pairs = []
             for w2 in words[n1+1:]:
                 if w2 not in seen and len(w1) > index and len(w2) > index and ed.eval(w1, w2) == 1 and len(w1) == len(w2) and w1[index] != w2[index]:
