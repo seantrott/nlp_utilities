@@ -76,9 +76,16 @@ class SystematicityUtilities(object):
     def compare_form_and_meaning_df(self, df, w1_column, w2_column):
         """Find all pairwise similarities in dataframe."""
         comparisons = df.apply(self._compare_form_and_meaning, w1_column=w1_column, w2_column=w2_column, axis=1)
-        zipped = list(zip(*comparison))
+        zipped = list(zip(*comparisons))
         forms, meanings = zipped[0], zipped[1]
         dataframe['form'] = forms
         dataframe['meaning'] = meanings
         return dataframe
+
+    def compare_form_and_meaning_list(self, words):
+        """Generates dataframe from words, then calls compare_form_and_meaning_df."""
+        w1, w2 = zip(*itertools.combinations(critical_words, 2))
+        new_df = pd.DataFrame.from_dict({'w1': w1,
+                                         'w2': w2})
+        return self.compare_form_and_meaning_df(new_df, 'w1', 'w2')
 
